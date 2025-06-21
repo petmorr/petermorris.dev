@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- SEO & Branding -->
+    <meta name="description" content="Portfolio site for Peter Morris" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Peter Morris Portfolio</title>
+</head>
+<body>
+    <!-- =================== HEADER =================== -->
+    <header>
+        <wrapper>
+            <h1>Peter Morris</h1>
+
+            <!-- Mobile nav toggle (renders only on small screens via CSS) -->
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation">&#9776;</button>
+
+            <nav id="primary-navigation">
+                <ul data-open="false">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </wrapper>
+    </header>
+
+    <!-- =================== MAIN CONTENT =================== -->
+    <main>
+        <wrapper>
+            <!-- About Section -->
+            <section id="about">
+                <h2>About Me</h2>
+                <p>Welcome to my portfolio! I’m <strong>Peter Morris</strong>, a student at Glasgow Caledonian University going into the NatWest Digital Transformation Graduate Scheme.</p>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects">
+                <h2>My Projects</h2>
+                <p>A quick taste of what I’ve built recently. (More coming soon!)</p>
+                
+                <ul class="projects-grid">
+                    <li class="project-card">
+                        <article>
+                            <h3>WeatherDash</h3>
+                            <p>A progressive web app providing hyper‑local weather forecasts and offline caching.</p>
+                            <a href="#" class="btn">View Project →</a>
+                        </article>
+                    </li>
+
+                    <li class="project-card">
+                        <article>
+                            <h3>TaskHive</h3>
+                            <p>A kanban‑style task manager built with vanilla JavaScript and indexedDB for persistence.</p>
+                            <a href="#" class="btn">View Project →</a>
+                        </article>
+                    </li>
+
+                    <li class="project-card">
+                        <article>
+                            <h3>CodeQuest Blog</h3>
+                            <p>My personal dev blog powered by a static site generator and custom Markdown components.</p>
+                            <a href="#" class="btn">Read Blog →</a>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2>Contact Me</h2>
+                <p>Have a project in mind, or just want to say hi? Let’s chat!</p>
+                <p>Email: <a href="mailto:peterm385@hotmail.co.uk">peterm385@hotmail.co.uk</a></p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/peter-morris-385/" target="_blank" rel="noopener">Peter Morris</a></p>
+            </section>
+        </wrapper>
+    </main>
+
+    <!-- =================== FOOTER =================== -->
+    <footer>
+        <wrapper>
+            <p>&copy; 2025 Peter Morris. All rights reserved.</p>
+            <p>Hand‑coded with HTML, CSS &amp; vanilla JS.</p>
+        </wrapper>
+    </footer>
+
+    <!-- =================== SCRIPTS =================== -->
+    <script>
+        // Mobile navigation toggle
+        const navList = document.querySelector('#primary-navigation ul');
+        const navToggle = document.querySelector('.mobile-nav-toggle');
+
+        navToggle.addEventListener('click', () => {
+            const isOpen = navList.dataset.open === 'true';
+            navList.dataset.open = isOpen ? 'false' : 'true';
+            navToggle.setAttribute('aria-expanded', (!isOpen).toString());
+        });
+    </script>
+</body>
+</html>
