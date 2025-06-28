@@ -50,13 +50,13 @@
   }
   @keyframes meteor {
     0% {
-      transform: rotate(215deg) translateX(0);
+      transform: rotate(var(--meteor-angle, 215deg)) translateX(0);
     }
     70% {
       opacity: 1;
     }
     100% {
-      transform: rotate(215deg) translateX(-500px);
+      transform: rotate(var(--meteor-angle, 215deg)) translateX(-600px);
       opacity: 0;
     }
   }
@@ -154,7 +154,8 @@
 
 @utility meteor {
   @apply absolute bg-gradient-to-r from-white via-white to-transparent rounded-full;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.4);
+  --meteor-angle: 215deg;
 }
 
 @utility day-bg {
@@ -186,6 +187,44 @@
 
 @utility animate-cloud {
   animation-name: cloud;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@utility bird {
+  @apply absolute text-blue-800 opacity-80;
+}
+
+@utility plane {
+  @apply absolute text-gray-600 opacity-80;
+}
+
+@keyframes bird {
+  from {
+    transform: translateX(-50px);
+  }
+  to {
+    transform: translateX(calc(100vw + 50px));
+  }
+}
+
+@utility animate-bird {
+  animation-name: bird;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes plane {
+  from {
+    transform: translateX(-100px);
+  }
+  to {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+@utility animate-plane {
+  animation-name: plane;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 const STAR_DENSITY = 10000; //px² per star
-const METEOR_COUNT = 5;
+const METEOR_COUNT = 8;
 
 export const StarBackground = () => {
   const [stars, setStars] = useState([]);
@@ -25,9 +25,10 @@ export const StarBackground = () => {
       id: `meteor-${i}`,
       size: Math.random() * 2 + 1,
       x: Math.random() * 100,
-      y: Math.random() * 20,
-      delay: Math.random() * 15,
-      duration: Math.random() * 3 + 3,
+      y: Math.random() * 40,
+      delay: Math.random() * 10,
+      duration: Math.random() * 5 + 4,
+      angle: Math.random() * 60 + 200,
     }));
     setMeteors(next);
   }, []);
@@ -64,12 +65,13 @@ export const StarBackground = () => {
           key={m.id}
           className="meteor animate-meteor"
           style={{
-            width: `${m.size * 50}px`,
+            width: `${m.size * 60}px`,
             height: `${m.size * 2}px`,
             left: `${m.x}%`,
             top: `${m.y}%`,
             animationDelay: `${m.delay}s`,
             animationDuration: `${m.duration}s`,
+            "--meteor-angle": `${m.angle}deg`,
           }}
         />
       ))}
