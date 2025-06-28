@@ -11,7 +11,7 @@ export const StarBackground = () => {
     const count = Math.floor((window.innerWidth * window.innerHeight) / STAR_DENSITY);
     const next = Array.from({ length: count }, (_, i) => ({
       id: `star-${i}`,
-      size: Math.random() * 3 + 1,
+      size: Math.random() * 4 + 2,
       x: Math.random() * 100,
       y: Math.random() * 100,
       opacity: Math.random() * 0.5 + 0.5,
@@ -44,7 +44,7 @@ export const StarBackground = () => {
   }, [generateStars, generateMeteors]);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden hidden dark:block">
       {stars.map((s) => (
         <div
           key={s.id}
