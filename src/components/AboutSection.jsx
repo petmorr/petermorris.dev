@@ -52,10 +52,10 @@ export const AboutSection = () => (
 
         {/* Feature cards */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <FeatureCard title="Web Development">PLACEHOLDER</FeatureCard>
-          <FeatureCard title="AI & ML">PLACEHOLDER</FeatureCard>
-          <FeatureCard title="Data Analysis">PLACEHOLDER</FeatureCard>
-          <FeatureCard title="Software Engineering">PLACEHOLDER</FeatureCard>
+          <FeatureCard title="Web Development">PLACEHOLDER</FeatureCard>
+          <FeatureCard title="Machine Learning">PLACEHOLDER</FeatureCard>
+          <FeatureCard title="Data Analysis">PLACEHOLDER</FeatureCard>
+          <FeatureCard title="Software Engineering">PLACEHOLDER</FeatureCard>
         </div>
       </div>
 

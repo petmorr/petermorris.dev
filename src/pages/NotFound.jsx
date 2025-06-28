@@ -7,9 +7,9 @@ export const NotFound = () => (
       The page you are looking for could not be found.
     </p>
 
-    {/* Route back to the Home page and scroll to #hero */}
+    {/* Route back to the Home page and scroll to #home */}
     <Link
-      to="/#hero"
+      to="/#home"
       replace
       className="cosmic-button mt-4 inline-block"
       aria-label="Go to home page"

@@ -1,8 +1,8 @@
 import { ArrowDown } from 'lucide-react';
 
-export const HeroSection = () => (
+export const HomeSection = () => (
   <section
-    id="hero"
+    id="home"
     className="relative flex min-h-screen flex-col items-center justify-center px-4"
   >
     <div className="container z-10 mx-auto max-w-4xl text-center">
