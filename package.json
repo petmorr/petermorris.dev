@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://petermorris.dev",
+  "homepage": "https://petmorr.github.io/petermorris.dev/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
