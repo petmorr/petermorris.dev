@@ -3,7 +3,8 @@ import { Home } from '@/pages/Home';
 import { NotFound } from '@/pages/NotFound';
 
 /**
- * Top‑level router wrapper.
+ * Main application component with routing configuration
+ * Handles top-level route definitions for the portfolio
  */
 function App() {
   return (

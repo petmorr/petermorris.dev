@@ -11,7 +11,7 @@ export const Home = () => (
     <StarBackground />
     <DayBackground />
     <Navbar />
-    <main>
+    <main className="relative z-10">
       <HomeSection />
       <AboutSection />
     </main>

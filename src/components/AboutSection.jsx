@@ -19,6 +19,25 @@ const FeatureCard = ({ title, children }) => (
   </div>
 );
 
+const FEATURE_CARDS = [
+  {
+    title: "Web Development",
+    description: "Building responsive, modern web applications with React, Next.js, and the latest web technologies."
+  },
+  {
+    title: "Machine Learning",
+    description: "Exploring AI/ML algorithms and implementing data-driven solutions for real-world problems."
+  },
+  {
+    title: "Data Analysis",
+    description: "Analyzing player performance data and creating insights for Celtic FC and Scottish Premiership."
+  },
+  {
+    title: "Software Engineering",
+    description: "Applying best practices in software architecture, testing, and maintainable code development."
+  }
+];
+
 export const AboutSection = () => (
   <section id="about" className="relative py-28 px-4 md:px-0">
     <div className="container mx-auto max-w-5xl space-y-16">
@@ -52,10 +71,11 @@ export const AboutSection = () => (
 
         {/* Feature cards */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <FeatureCard title="Web Development">PLACEHOLDER</FeatureCard>
-          <FeatureCard title="Machine Learning">PLACEHOLDER</FeatureCard>
-          <FeatureCard title="Data Analysis">PLACEHOLDER</FeatureCard>
-          <FeatureCard title="Software Engineering">PLACEHOLDER</FeatureCard>
+          {FEATURE_CARDS.map((card) => (
+            <FeatureCard key={card.title} title={card.title}>
+              {card.description}
+            </FeatureCard>
+          ))}
         </div>
       </div>
 
@@ -67,7 +87,7 @@ export const AboutSection = () => (
         </a>
 
         <a
-          href="@/assets/resume.pdf"
+          href="/assets/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-primary px-6 py-2 text-primary transition-colors duration-300 hover:bg-primary hover:text-background"
