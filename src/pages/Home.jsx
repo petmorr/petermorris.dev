@@ -11,7 +11,6 @@ export const Home = () => (
     <StarBackground />
     <DayBackground />
     <Navbar />
-
     <main>
       <HomeSection />
       <AboutSection />

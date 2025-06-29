@@ -1,15 +1,21 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme {
+/*
+ * ======================================================================
+ *  Core Theme & Animation Definitions
+ * ======================================================================
+ */
+
+:root {
+  /* Color Tokens: Abstracted HSL values for theme consistency. */
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-
   --color-card: hsl(var(--card));
 
+  /* Animation Tokens: Reusable animation definitions. */
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
   --animate-fade-in: fade-in 0.7s ease-in-out forwards;
@@ -17,165 +23,82 @@
   --animate-fade-in-2: fade-in 0.7s ease-out 0.4s forwards;
   --animate-fade-in-3: fade-in 0.7s ease-out 0.6s forwards;
   --animate-fade-in-4: fade-in 0.7s ease-out 0.8s forwards;
-  --animate-meteor: meteor 5s linear infinite;
+}
 
-  @keyframes float {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  @keyframes pulse-subtle {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes meteor {
-    0% {
-      transform: rotate(var(--meteor-angle, 215deg)) translateX(0);
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(var(--meteor-angle, 215deg)) translateX(-600px);
-      opacity: 0;
-    }
+/*
+ * ======================================================================
+ *  Keyframe Animations
+ * ======================================================================
+ */
+
+/* Subtle floating effect. */
+@keyframes float {
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-@layer base {
-  :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
-
-    --card: 0 0% 100%;
-
-    --primary: 250 47% 60%;
-    --primary-foreground: 210 40% 98%;
-
-    --border: 214 32% 91%;
-  }
-
-  .dark {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
-
-    --card: 222 47% 4%;
-
-    --primary: 250 65% 65%;
-    --primary-foreground: 213 31% 91%;
-
-    --border: 217 33% 20%;
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  html {
-    @apply scroll-smooth;
-  }
-
-  body {
-    @apply bg-background text-foreground transition-colors duration-300;
-    font-feature-settings: "rlig" 1, "calt" 1;
+/* Gentle pulsing opacity for a breathing effect. */
+@keyframes pulse-subtle {
+  50% {
+    opacity: 0.8;
   }
 }
 
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-
-  @media (width >= 640px) {
-    max-width: 640px;
+/* Fades in and moves up into place. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  @media (width >= 768px) {
-    max-width: 768px;
-  }
-  @media (width >= 1024px) {
-    max-width: 1024px;
-  }
-  @media (width >= 1280px) {
-    max-width: 1280px;
-  }
-  @media (width >= 1536px) {
-    max-width: 1536px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@utility text-glow {
-  @apply relative;
-  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+/* A shooting star path. Angle and distance are controlled by CSS variables. */
+@keyframes meteor {
+  0% {
+    transform: rotate(var(--meteor-angle, 215deg)) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--meteor-angle, 215deg)) translateX(calc(-1 * var(--meteor-tail-length, 240px)));
+    opacity: 0;
+  }
 }
 
-@utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+/* A crisp twinkle effect that scales and brightens. */
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: var(--twinkle-start, 0.6);
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: var(--twinkle-end, 1);
+  }
 }
 
-@utility gradient-border {
-  @apply relative rounded-md;
-  background: linear-gradient(
-    to right,
-    hsl(var(--card)),
-    hsl(var(--card))
-  );
-  background-clip: padding-box;
-  border: 1px solid transparent;
+/* Moves an element across the entire viewport width. */
+@keyframes ufo-fly {
+  from {
+    transform: translateX(-120px) rotate(-2deg);
+  }
+  to {
+    transform: translateX(calc(100vw + 120px)) rotate(2deg);
+  }
 }
 
-@utility cosmic-button {
-  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)] hover:scale-105 active:scale-95;
-}
-
-@utility star {
-  @apply absolute bg-yellow-200;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
-}
-
-@utility meteor {
-  @apply absolute bg-gradient-to-r from-white via-white to-transparent rounded-full;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.4);
-  --meteor-angle: 215deg;
-}
-
-@utility day-bg {
-  @apply bg-gradient-to-b from-sky-200 to-sky-50;
-}
-
-@utility sun {
-  @apply absolute bg-yellow-300 rounded-full;
-  width: 150px;
-  height: 150px;
-  top: 10%;
-  right: 10%;
-  box-shadow: 0 0 50px rgba(253, 224, 71, 0.6);
-}
-
-@utility cloud {
-  @apply absolute bg-white/80 rounded-full;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
+/* Simple horizontal traversal animations for day-scene elements. */
 @keyframes cloud {
   from {
     transform: translateX(-200px);
@@ -184,21 +107,6 @@
     transform: translateX(calc(100vw + 200px));
   }
 }
-
-@utility animate-cloud {
-  animation-name: cloud;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@utility bird {
-  @apply absolute text-blue-800 opacity-80;
-}
-
-@utility plane {
-  @apply absolute text-gray-600 opacity-80;
-}
-
 @keyframes bird {
   from {
     transform: translateX(-50px);
@@ -207,13 +115,6 @@
     transform: translateX(calc(100vw + 50px));
   }
 }
-
-@utility animate-bird {
-  animation-name: bird;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
 @keyframes plane {
   from {
     transform: translateX(-100px);
@@ -223,15 +124,234 @@
   }
 }
 
-@utility animate-plane {
-  animation-name: plane;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+/*
+ * ======================================================================
+ *  Base Layer: Foundational styles and theme variables.
+ * ======================================================================
+ */
+@layer base {
+  /* Light theme (default) HSL values. */
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --primary: 250 47% 60%;
+    --primary-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+  }
+
+  /* Dark theme HSL values. */
+  .dark {
+    --background: 222 47% 4%;
+    --foreground: 213 31% 91%;
+    --card: 222 47% 4%;
+    --primary: 250 65% 65%;
+    --primary-foreground: 213 31% 91%;
+    --border: 217 33% 20%;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-duration: 300ms;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  #root {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
 }
 
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
+/*
+ * ======================================================================
+ *  Utilities Layer: Component and helper classes.
+ * ======================================================================
+ */
+@layer utilities {
+  /* A custom container, similar to Tailwind's, for content centering. */
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
+  /* Adds a subtle glow effect to text, using the primary color. */
+  .text-glow {
+    position: relative;
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+
+  /* A hover effect for card-like elements. */
+  .card-hover {
+    transition: transform 300ms;
+  }
+  .card-hover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  }
+
+  /* A button styled with theme colors and interactive effects. */
+  .cosmic-button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+    font-weight: 500;
+    transition: all 300ms;
+  }
+  .cosmic-button:hover {
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+    transform: scale(1.05);
+  }
+  .cosmic-button:active {
+    transform: scale(0.95);
+  }
+
+  /* --- Night Scene: Starfield, Moon, UFO --- */
+  .star {
+    position: absolute;
+    background: radial-gradient(circle, #ffffff 0%, rgb(255 255 255 / 0) 70%);
+    border-radius: 50%;
+    animation: twinkle var(--twinkle-duration, 4s) ease-in-out infinite;
+    filter: blur(1px);
+  }
+
+  .meteor {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle, #fff 0%, rgb(255 255 255 / 0.7) 40%, transparent 100%);
+    box-shadow: 0 0 12px 6px rgb(255 255 255 / 0.6);
+    overflow: visible;
+    animation: meteor var(--meteor-duration, 6s) linear infinite;
+  }
+  .meteor::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    width: var(--meteor-tail-length, 220px);
+    height: 2px;
+    background: linear-gradient(90deg, rgb(255 255 255 / 0.8) 0%, transparent 100%);
+    filter: blur(1px);
+    transform-origin: left center;
+  }
+  .meteor--fast {
+    --meteor-duration: 3s;
+  }
+  .meteor--slow {
+    --meteor-duration: 8s;
+  }
+
+  .moon {
+    position: absolute;
+    top: 8%;
+    right: 6%;
+    width: 180px;
+    height: 180px;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 35% 35%, #f5f5fa, #e0e0ef 40%, #c8c8e0 60%, #b0b0d0 85%, transparent 100%);
+    box-shadow:
+      inset -25px -15px 40px 0px rgb(0 0 0 / 0.1),
+      inset 10px 5px 15px 0px rgb(255 255 255 / 0.15),
+      0 0 60px -10px rgb(255 255 255 / 0.25),
+      0 0 120px -20px rgb(240 240 255 / 0.15);
+  }
+
+  .ufo {
+    position: absolute;
+    left: -120px;
+    width: 60px;
+    height: 20px;
+    background: linear-gradient(180deg, #c0c8d0 0%, #5d646e 100%);
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.4), 0 0 8px 2px rgb(0 255 255 / 0.2);
+    animation: ufo-fly var(--ufo-duration, 12s) linear infinite;
+  }
+  .ufo::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    margin-left: -14px;
+    width: 28px;
+    height: 12px;
+    background: radial-gradient(circle at 50% 55%, rgb(255 255 255 / 0.9) 0%, rgb(220 240 255 / 0.6) 100%);
+    border-radius: 50% / 60%;
+    filter: drop-shadow(0 0 6px rgb(0 255 255 / 0.3));
+  }
+  .ufo--fast {
+    --ufo-duration: 8s;
+  }
+  .ufo--slow {
+    --ufo-duration: 16s;
+  }
+
+  /* --- Day Scene: Sun, Clouds, etc. --- */
+  .day-bg {
+    background: linear-gradient(to bottom, #87ceeb, #d6f0ff 70%, #f0f9ff);
+  }
+
+  .sun {
+    position: absolute;
+    background: radial-gradient(circle, #fff59d, #fdd835 60%, rgb(251 191 36 / 0.5) 100%);
+    border-radius: 9999px;
+    box-shadow: 0 0 80px 20px #fde047, 0 0 150px 50px rgb(253 224 71 / 0.5);
+  }
+
+  .cloud {
+    position: absolute;
+    background: radial-gradient(circle at 50% 50%, white, rgb(255 255 255 / 0) 70%);
+    border-radius: 50%;
+    filter: blur(10px);
+    opacity: 0.8;
+  }
+  .animate-cloud {
+    animation: cloud linear infinite;
+  }
+
+  .bird {
+    position: absolute;
+    color: #1e40af;
+    opacity: 0.8;
+  }
+
+  .plane {
+    position: absolute;
+    color: #4b5563;
+    opacity: 0.8;
+  }
 }
