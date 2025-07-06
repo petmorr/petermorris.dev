@@ -26,10 +26,10 @@ const generateElement = (type, index) => {
             return {
                 ...baseConfig,
                 x: -120 - Math.random() * 80,
-                y: Math.random() * 20 + 40,
-                size: Math.random() * 25 + 30,
-                duration: Math.random() * 20 + 25,
-                flockOffset: Math.random() * 10 - 5,
+                y: Math.random() * 15 + 15, // Position birds higher in the sky, away from main content
+                size: Math.random() * 20 + 25, // Slightly smaller birds
+                duration: Math.random() * 25 + 30, // Slower movement
+                flockOffset: Math.random() * 8 - 4,
             };
         default:
             return baseConfig;
@@ -151,7 +151,8 @@ const generateElement = (type, index) => {
                     animationDuration: `${bird.duration}s`,
                     animationDelay: `${bird.delay}s`,
                     zIndex: 7,
-                    filter: 'drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.25))',
+                    opacity: 0.35,
+                    filter: 'drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15)) blur(0.5px)',
                   }}
                 >
                   <BirdSVG size={bird.size} />
